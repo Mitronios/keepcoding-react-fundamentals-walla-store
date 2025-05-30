@@ -27,38 +27,100 @@ const LoginForm = () => {
 	};
 
 	return (
-		<section>
-			<h3>Please Login</h3>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="email">Email:</label>
-				<input
-					type="email"
-					id="email"
-					name="email"
-					placeholder="email@example.com"
-					required
-					value={credentials.email}
-					onChange={handleChange}
-				/>
-				<label htmlFor="password">Password:</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					placeholder="**********"
-					required
-					value={credentials.password}
-					onChange={handleChange}
-				/>
-				<input
-					type="checkbox"
-					id="remember-me"
-					name="rememberMe"
-					checked={credentials.rememberMe}
-					onChange={handleChange}
-				/>
-				<label htmlFor="remember-me">Remember me</label>
-				<button type="submit">Login</button>
+		<section
+			className="
+    min-h-screen flex items-center justify-center
+    bg-gray-100 dark:bg-gray-900"
+		>
+			<form
+				className="
+          bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl
+          flex flex-col gap-5 w-full max-w-sm
+        "
+				onSubmit={handleSubmit}
+			>
+				<h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">
+					Please Login
+				</h3>
+				<div className="flex flex-col gap-2">
+					<label
+						className="
+              bg-green-500 text-white
+              py-2 px-4 rounded-md font-semibold text-sm uppercase
+            "
+						htmlFor="email"
+					>
+						Email:
+					</label>
+					<input
+						className="p-3 border border-gray-300 rounded-md
+          text-gray-700 placeholder-gray-400
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
+          dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-500"
+						type="email"
+						id="email"
+						name="email"
+						placeholder="email@example.com"
+						required
+						value={credentials.email}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="flex flex-col gap-2">
+					<label
+						className="
+          bg-green-500 text-white
+            py-2 px-4 rounded-md font-semibold text-sm uppercase"
+						htmlFor="password"
+					>
+						Password:
+					</label>
+					<input
+						className="
+            p-3 border border-gray-300 rounded-md
+            text-gray-700 placeholder-gray-400
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
+            dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-500"
+						type="password"
+						id="password"
+						name="password"
+						placeholder="**********"
+						required
+						value={credentials.password}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="flex items-center gap-2">
+					<input
+						className="
+            form-checkbox h-5 w-5 text-green-600 rounded
+            focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600"
+						type="checkbox"
+						id="remember-me"
+						name="rememberMe"
+						checked={credentials.rememberMe}
+						onChange={handleChange}
+					/>
+					<label
+						className="
+           bg-green-500 text-white
+            py-1.5 px-3 rounded-md font-semibold text-xs uppercase"
+						htmlFor="remember-me"
+					>
+						Remember me
+					</label>
+				</div>
+				<button
+					className="
+        bg-green-600 hover:bg-green-700 text-white
+        font-bold py-3 px-6 rounded-md
+        transition duration-300 ease-in-out
+        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75
+        dark:bg-green-700 dark:hover:bg-green-800"
+					type="submit"
+				>
+					Login
+				</button>
 			</form>
 		</section>
 	);
