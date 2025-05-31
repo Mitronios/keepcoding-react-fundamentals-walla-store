@@ -1,4 +1,5 @@
 import "./App.css";
+import Adverts from "./pages/Adverts";
 import LoginForm from "./pages/LoginForm";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
 		<main className=" max-w-[1024px] w-[90%] my-0 mx-auto bg">
 			<h1 className="text-gray-500 text-2xl">React Walla store</h1>
 			<LoginForm />
+			<Adverts />
 		</main>
 	);
 }

@@ -7,3 +7,10 @@ export interface Advert {
 	tags: string[];
 	photo: string | null;
 }
+
+export interface AdvertFilters {
+	name?: string;
+	sale?: boolean;
+	price?: string;
+	tags?: string;
+}
