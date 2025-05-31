@@ -1,6 +1,5 @@
 import type { Advert, AdvertFilters } from "../interfaces/advert";
-
-const ADVERTS_BASE_URL = "http://localhost:3001/api/v1";
+import { customFetch } from "./fetchClient";
 
 const buildQueryURL = (filters?: AdvertFilters): string => {
 	const queryParams = new URLSearchParams();
@@ -11,9 +10,7 @@ const buildQueryURL = (filters?: AdvertFilters): string => {
 		}
 	});
 
-	return `${ADVERTS_BASE_URL}/adverts${
-		queryParams.toString() ? `?${queryParams}` : ""
-	}`;
+	return `/adverts${queryParams.toString() ? `?${queryParams}` : ""}`;
 };
 
 export const getAdverts = async (
@@ -22,7 +19,7 @@ export const getAdverts = async (
 	const url = buildQueryURL(filters);
 
 	try {
-		const response = await fetch(url);
+		const response = await customFetch(url);
 
 		if (!response.ok) {
 			const errorData = await response.json();
@@ -41,7 +38,7 @@ export const getAdverts = async (
 
 export const getAvailableTags = async (): Promise<string[]> => {
 	try {
-		const response = await fetch(`${ADVERTS_BASE_URL}/adverts/tags`);
+		const response = await customFetch("/adverts/tags");
 
 		if (!response.ok) {
 			const errorData = await response.json();

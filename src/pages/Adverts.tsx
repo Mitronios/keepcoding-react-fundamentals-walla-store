@@ -1,17 +1,59 @@
-import React from "react";
-import { Tag, DollarSign, ShoppingBag, ShoppingCart } from "lucide-react"; // Importando iconos de lucide-react
+import { useContext, useEffect, useState } from "react";
+import { Tag, DollarSign } from "lucide-react";
 import type { Advert } from "../interfaces/advert";
+import formatPrice from "../utils/formatPrice";
+import { getAdverts } from "../services/advertServices";
+import { AuthContext } from "../context/AuthContext";
+import { setAuthorizationHeader } from "../services/fetchClient";
 
-interface AdvertsProps {
-	adverts?: Advert[];
-}
+const Adverts = () => {
+	const [adverts, setAdverts] = useState<Advert[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [hasError, setHasError] = useState<string | null>(null);
+	const authContext = useContext(AuthContext);
 
-const Adverts: React.FC<AdvertsProps> = ({ adverts = [] }) => {
-	const formatPrice = (price: number) => {
-		return new Intl.NumberFormat("es-ES", {
-			style: "currency",
-			currency: "EUR",
-		}).format(price);
+	const token = authContext?.token;
+
+	useEffect(() => {
+		if (token) {
+			setAuthorizationHeader(token);
+		}
+
+		const fetchAdverts = async () => {
+			try {
+				const data = await getAdverts();
+				setAdverts(data);
+			} catch (error) {
+				setHasError("Something went wrong, please try again later");
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchAdverts();
+	}, []);
+
+	if (isLoading) {
+		return (
+			<section className="p-8 text-center text-gray-600">
+				<p className="text-xl">Cargando anuncios...</p>
+			</section>
+		);
+	}
+
+	if (hasError) {
+		return (
+			<section className="p-8 text-center text-red-600">
+				<p className="text-xl">{hasError}</p>
+			</section>
+		);
+	}
+
+	const handleOnError = (
+		event: React.SyntheticEvent<HTMLImageElement, Event>,
+	) => {
+		event.currentTarget.src = `https://placehold.co/400x200/cccccc/333333?text=No+Image`;
+		event.currentTarget.alt = "No image available";
 	};
 
 	return (
@@ -47,16 +89,13 @@ const Adverts: React.FC<AdvertsProps> = ({ adverts = [] }) => {
 										src={advert.photo}
 										alt={advert.name}
 										className="w-full h-full object-cover"
-										onError={(event) => {
-											event.currentTarget.src = `https://placehold.co/400x200/cccccc/333333?text=No+Image`;
-											event.currentTarget.alt = "No image available";
-										}}
+										onError={handleOnError}
 									/>
 								) : (
 									// If Photo is null
 									<div className="flex flex-col items-center justify-center text-gray-500">
 										<img
-											src={`https://placehold.co/400x200/cccccc/333333?text=No+Imag`}
+											src={`https://placehold.co/400x200/cccccc/333333?text=No+Image`}
 											alt="No Image"
 											className="w-full h-full object-cover"
 										/>
