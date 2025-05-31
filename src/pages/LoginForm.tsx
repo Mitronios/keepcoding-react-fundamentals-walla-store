@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { UserCredentials } from "../interfaces/auth";
+import { authService } from "../services/authService";
 
 const initialLoginState: UserCredentials = {
 	email: "",
@@ -21,9 +22,25 @@ const LoginForm = () => {
 		}));
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+	const handleSubmit = async (
+		event: React.FormEvent<HTMLFormElement>,
+	): Promise<void> => {
 		event.preventDefault();
-		console.log(credentials);
+		try {
+			const response = await authService(credentials);
+			const authToken = response.accessToken;
+
+			if (credentials.rememberMe) {
+				localStorage.setItem("authToken", authToken);
+			} else {
+				console.log(response);
+				sessionStorage.setItem("authToken", authToken);
+			}
+
+			// TODO: redirect user to adverts page
+		} catch (error) {
+			console.log("Uh! Oh!", error);
+		}
 	};
 
 	return (
@@ -62,6 +79,7 @@ const LoginForm = () => {
 						name="email"
 						placeholder="email@example.com"
 						required
+						autoComplete="email"
 						value={credentials.email}
 						onChange={handleChange}
 					/>
@@ -86,6 +104,7 @@ const LoginForm = () => {
 						name="password"
 						placeholder="**********"
 						required
+						autoComplete="current-password"
 						value={credentials.password}
 						onChange={handleChange}
 					/>
@@ -98,6 +117,7 @@ const LoginForm = () => {
 						type="checkbox"
 						id="remember-me"
 						name="rememberMe"
+						autoComplete="off"
 						checked={credentials.rememberMe}
 						onChange={handleChange}
 					/>
