@@ -39,13 +39,13 @@ const LoginForm = () => {
         "
 				onSubmit={handleSubmit}
 			>
-				<h3 className="text-2xl font-bold text-gray-800 dark:text-white text-center mb-6">
+				<h3 className="text-2xl font-bold text-gray-500 dark:text-white text-center mb-6">
 					Please Login
 				</h3>
 				<div className="flex flex-col gap-2">
 					<label
 						className="
-              bg-green-500 text-white
+              bg-green-700 text-white
               py-2 px-4 rounded-md font-semibold text-sm uppercase
             "
 						htmlFor="email"
@@ -69,7 +69,7 @@ const LoginForm = () => {
 				<div className="flex flex-col gap-2">
 					<label
 						className="
-          bg-green-500 text-white
+          bg-green-700 text-white
             py-2 px-4 rounded-md font-semibold text-sm uppercase"
 						htmlFor="password"
 					>
@@ -103,7 +103,7 @@ const LoginForm = () => {
 					/>
 					<label
 						className="
-           bg-green-500 text-white
+           bg-green-700 text-white
             py-1.5 px-3 rounded-md font-semibold text-xs uppercase"
 						htmlFor="remember-me"
 					>
@@ -112,11 +112,11 @@ const LoginForm = () => {
 				</div>
 				<button
 					className="
-        bg-green-600 hover:bg-green-700 text-white
+        bg-green-700 hover:bg-green-700 text-white
         font-bold py-3 px-6 rounded-md
         transition duration-300 ease-in-out
         focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75
-        dark:bg-green-700 dark:hover:bg-green-800"
+        dark:bg-green-800 dark:hover:bg-green-900"
 					type="submit"
 				>
 					Login
