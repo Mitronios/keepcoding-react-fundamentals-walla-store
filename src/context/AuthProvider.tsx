@@ -7,14 +7,13 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-	const [token, setToken] = useState<string | null>(null);
-
-	useEffect(() => {
+	const getStoredToken = (): string | null => {
 		const localToken = localStorage.getItem("authToken");
 		const sessionToken = sessionStorage.getItem("authToken");
-		const storedToken = localToken || sessionToken;
-		setToken(storedToken);
-	}, []);
+		return localToken || sessionToken;
+	};
+
+	const [token, setToken] = useState<string | null>(getStoredToken);
 
 	const login = (newToken: string, rememberMe: boolean) => {
 		if (rememberMe) {

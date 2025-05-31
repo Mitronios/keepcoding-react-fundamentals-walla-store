@@ -1,16 +1,20 @@
 import { useState } from "react";
 import type { UserCredentials } from "../interfaces/auth";
+import { useAuth } from "../context/AuthContext";
 import { authService } from "../services/authService";
 
-const initialLoginState: UserCredentials = {
-	email: "",
-	password: "",
-	rememberMe: false,
-};
-
 const LoginForm = () => {
+	const initialLoginState: UserCredentials = {
+		email: "",
+		password: "",
+		rememberMe: false,
+	};
+
 	const [credentials, setCredentials] =
 		useState<UserCredentials>(initialLoginState);
+
+	// Context
+	const { login } = useAuth();
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value, type, checked } = event.target;
@@ -29,13 +33,7 @@ const LoginForm = () => {
 		try {
 			const response = await authService(credentials);
 			const authToken = response.accessToken;
-
-			if (credentials.rememberMe) {
-				localStorage.setItem("authToken", authToken);
-			} else {
-				console.log(response);
-				sessionStorage.setItem("authToken", authToken);
-			}
+			login(authToken, credentials.rememberMe);
 
 			// TODO: redirect user to adverts page
 		} catch (error) {
