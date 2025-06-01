@@ -14,3 +14,11 @@ export interface AdvertFilters {
 	price?: string;
 	tags?: string;
 }
+
+export interface AdvertCreatePayload {
+	name: string;
+	sale: boolean;
+	price: number;
+	tags: string[];
+	photo?: File;
+}
