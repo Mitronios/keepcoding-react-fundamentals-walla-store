@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { UserCredentials } from "../interfaces/auth";
 import { useAuth } from "../context/AuthContext";
 import { authService } from "../services/authService";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 	const initialLoginState: UserCredentials = {
@@ -26,6 +27,11 @@ const LoginForm = () => {
 		}));
 	};
 
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const from = location.state?.from?.pathname || "/adverts";
+
 	const handleSubmit = async (
 		event: React.FormEvent<HTMLFormElement>,
 	): Promise<void> => {
@@ -34,8 +40,7 @@ const LoginForm = () => {
 			const response = await authService(credentials);
 			const authToken = response.accessToken;
 			login(authToken, credentials.rememberMe);
-
-			// TODO: redirect user to adverts page
+			navigate(from, { replace: true });
 		} catch (error) {
 			console.log("Uh! Oh!", error);
 		}
