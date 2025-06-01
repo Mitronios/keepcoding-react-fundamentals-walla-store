@@ -86,12 +86,6 @@ cd nodepop-api
 
 ```
 
-- If preferred use docker hub:
-
-```bash
-    $ docker run --name nodepop-api -dp 3001:3001 -v nodepop-api-data:/home/node/app/data -v nodepop-api-uploads:/home/node/app/uploads davidjj76/nodepop-api
-```
-
 5.  **Install dependencies:**
 
 ```bash
@@ -113,6 +107,12 @@ yarn dev
 7. **Check the swagger docs**
 
 - Navigate to: /swagger and check how the API works.
+
+- If preferred use docker hub:
+
+```bash
+    $ docker run --name nodepop-api -dp 3001:3001 -v nodepop-api-data:/home/node/app/data -v nodepop-api-uploads:/home/node/app/uploads davidjj76/nodepop-api
+```
 
 ---
 
