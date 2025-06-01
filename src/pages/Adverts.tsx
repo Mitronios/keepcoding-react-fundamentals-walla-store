@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { setAuthorizationHeader } from "../services/fetchClient";
 import type { filtersType } from "../interfaces/filtersType";
 import AdvertFilters from "../components/AdvertFilters";
+import { Link } from "react-router-dom";
 
 const Adverts = () => {
 	const [adverts, setAdverts] = useState<Advert[]>([]);
@@ -84,9 +85,9 @@ const Adverts = () => {
 				//Card
 				<article className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 					{adverts.map((advert) => (
-						<a
+						<Link
 							key={advert.id}
-							href={`/adverts/${advert.id}`}
+							to={`/adverts/${advert.id}`}
 							className="block bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden"
 						>
 							<div className="relative w-full h-48 bg-gray-200 flex items-center justify-center overflow-hidden rounded-t-xl">
@@ -146,7 +147,7 @@ const Adverts = () => {
 									See more details
 								</button>
 							</div>
-						</a>
+						</Link>
 					))}
 				</article>
 			)}
