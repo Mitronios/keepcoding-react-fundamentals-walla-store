@@ -74,12 +74,12 @@ const Adverts = () => {
 					<p className="text-2xl text-gray-600 mb-6">
 						Sorry no adverts have been published yet. Be the first!
 					</p>
-					<a
-						href=""
+					<Link
+						to={"/adverts/new-advert"}
 						className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105"
 					>
 						Create new Advert
-					</a>
+					</Link>
 				</article>
 			) : (
 				//Card
