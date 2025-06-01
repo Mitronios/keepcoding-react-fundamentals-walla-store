@@ -5,7 +5,7 @@ import LoginForm from "./pages/LoginForm";
 import { RequireAuth } from "./auth/RequireAuth";
 import AdvertDetail from "./pages/AdvertDetail";
 import NewAdvertPage from "./pages/NewAdvertPage";
-import NotFound from "./pages/Notfound";
+import NotFound from "./pages/NotFound";
 
 function App() {
 	return (
@@ -19,6 +19,14 @@ function App() {
 					<Route
 						path="/login"
 						element={<LoginForm />}
+					/>
+					<Route
+						path="/"
+						element={
+							<RequireAuth>
+								<Adverts />
+							</RequireAuth>
+						}
 					/>
 					<Route
 						path="/adverts"
