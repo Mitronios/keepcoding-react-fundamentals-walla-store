@@ -1,12 +1,14 @@
 import "./App.css";
+import Navbar from "./components/layout/navBar";
 import Adverts from "./pages/Adverts";
-import LoginForm from "./pages/LoginForm";
 
 function App() {
 	return (
-		<main className=" max-w-[1024px] w-[90%] my-0 mx-auto bg">
-			<h1 className="text-gray-500 text-2xl">React Walla store</h1>
-			<LoginForm />
+		<main
+			className=" max-w-[1024px] w-[90%] my-0 mx-auto
+    bg-gray-100"
+		>
+			<Navbar />
 			<Adverts />
 		</main>
 	);

@@ -45,16 +45,16 @@ const LoginForm = () => {
 		<section
 			className="
     min-h-screen flex items-center justify-center
-    bg-gray-100 dark:bg-gray-900"
+    bg-gray-100"
 		>
 			<form
 				className="
-          bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl
+          bg-white p-8 rounded-lg shadow-xl
           flex flex-col gap-5 w-full max-w-sm
         "
 				onSubmit={handleSubmit}
 			>
-				<h3 className="text-2xl font-bold text-gray-500 dark:text-white text-center mb-6">
+				<h3 className="text-2xl font-bold text-gray-500  text-center mb-6">
 					Please Login
 				</h3>
 				<div className="flex flex-col gap-2">
@@ -70,8 +70,7 @@ const LoginForm = () => {
 					<input
 						className="p-3 border border-gray-300 rounded-md
           text-gray-700 placeholder-gray-400
-            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
-          dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-500"
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
 						type="email"
 						id="email"
 						name="email"
@@ -95,8 +94,7 @@ const LoginForm = () => {
 						className="
             p-3 border border-gray-300 rounded-md
             text-gray-700 placeholder-gray-400
-            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
-            dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-500"
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
 						type="password"
 						id="password"
 						name="password"
@@ -111,7 +109,7 @@ const LoginForm = () => {
 					<input
 						className="
             form-checkbox h-5 w-5 text-green-600 rounded
-            focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600"
+            focus:ring-green-500"
 						type="checkbox"
 						id="remember-me"
 						name="rememberMe"
@@ -133,8 +131,7 @@ const LoginForm = () => {
         bg-green-700 hover:bg-green-700 text-white
         font-bold py-3 px-6 rounded-md
         transition duration-300 ease-in-out
-        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75
-        dark:bg-green-800 dark:hover:bg-green-900"
+        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
 					type="submit"
 				>
 					Login
