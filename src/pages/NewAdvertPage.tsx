@@ -97,7 +97,7 @@ export const NewAdvertPage: React.FC = () => {
 
 					<div>
 						<label className="block text-sm font-medium text-gray-700 mb-1">
-							Tipo *
+							Type *
 						</label>
 						<div className="flex items-center space-x-4 mt-2">
 							<label className="inline-flex items-center cursor-pointer">
