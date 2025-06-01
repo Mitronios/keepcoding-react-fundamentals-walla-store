@@ -6,7 +6,11 @@ const buildQueryURL = (filters?: AdvertFilters): string => {
 
 	Object.entries(filters || {}).forEach(([key, value]) => {
 		if (value !== undefined && value !== "") {
-			queryParams.append(key, String(value));
+			if (key === "tags" && Array.isArray(value)) {
+				queryParams.append(key, value.join(","));
+			} else {
+				queryParams.append(key, String(value));
+			}
 		}
 	});
 

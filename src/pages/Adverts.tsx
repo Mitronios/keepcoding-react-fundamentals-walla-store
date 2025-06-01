@@ -1,15 +1,20 @@
 import { useContext, useEffect, useState } from "react";
-import { Tag, DollarSign } from "lucide-react";
+import { Tag, Banknote } from "lucide-react";
 import type { Advert } from "../interfaces/advert";
 import formatPrice from "../utils/formatPrice";
 import { getAdverts } from "../services/advertServices";
 import { AuthContext } from "../context/AuthContext";
 import { setAuthorizationHeader } from "../services/fetchClient";
+import type { filtersType } from "../interfaces/filtersType";
+import AdvertFilters from "../components/AdvertFilters";
 
 const Adverts = () => {
 	const [adverts, setAdverts] = useState<Advert[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [hasError, setHasError] = useState<string | null>(null);
+
+	const [filters, setFilters] = useState<filtersType>({});
+
 	const authContext = useContext(AuthContext);
 
 	const token = authContext?.token;
@@ -21,7 +26,7 @@ const Adverts = () => {
 
 		const fetchAdverts = async () => {
 			try {
-				const data = await getAdverts();
+				const data = await getAdverts(filters);
 				setAdverts(data);
 			} catch (error) {
 				setHasError("Something went wrong, please try again later");
@@ -31,7 +36,7 @@ const Adverts = () => {
 		};
 
 		fetchAdverts();
-	}, []);
+	}, [filters]);
 
 	if (isLoading) {
 		return (
@@ -62,6 +67,7 @@ const Adverts = () => {
 				Adverts listed
 			</h1>
 
+			<AdvertFilters onChange={setFilters} />
 			{adverts.length === 0 ? (
 				<article className="flex flex-col items-center justify-center h-96 bg-white rounded-xl shadow-lg p-8">
 					<p className="text-2xl text-gray-600 mb-6">
@@ -107,7 +113,7 @@ const Adverts = () => {
 										advert.sale ? "bg-green-500" : "bg-purple-600"
 									}`}
 								>
-									{advert.sale ? "Venta" : "Compra"}
+									{advert.sale ? "For Sale" : "Buying"}
 								</span>
 							</div>
 
@@ -118,12 +124,11 @@ const Adverts = () => {
 								</h2>
 
 								<div className="flex items-center text-gray-700 mb-3">
-									<DollarSign className="w-5 h-5 text-gray-500 mr-2" />
+									<Banknote className="w-5 h-5 text-gray-500 mr-2" />
 									<span className="text-lg font-semibold">
 										{formatPrice(advert.price)}
 									</span>
 								</div>
-
 								{/* Tags */}
 								<div className="flex flex-wrap gap-2 mb-4">
 									{advert.tags.map((tag, index) => (
@@ -136,7 +141,6 @@ const Adverts = () => {
 										</span>
 									))}
 								</div>
-
 								{/* For accesibility*/}
 								<button className="w-full bg-indigo-500 text-white py-2 rounded-lg font-semibold hover:bg-indigo-600 transition duration-200 ease-in-out">
 									See more details
