@@ -1,23 +1,23 @@
-import type { ReactNode } from "react";
+import { useAppSelector } from "../store/hooks";
+import { selectIsAuthenticated, selectAuthStatus } from "../store/selectors";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 
 interface RequireAuthProps {
-	children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const RequireAuth = ({ children }: RequireAuthProps) => {
-	const { isAuthenticated } = useAuth();
-	const location = useLocation();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const authStatus = useAppSelector(selectAuthStatus);
+  const location = useLocation();
 
-	if (!isAuthenticated) {
-		return (
-			<Navigate
-				to="/login"
-				state={{ from: location }}
-				replace
-			/>
-		);
-	}
-	return children;
+  if (authStatus === "loading") {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
+  return <>{children}</>;
 };
