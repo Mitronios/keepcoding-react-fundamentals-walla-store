@@ -1,0 +1,135 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AdvertFilters Component > should match snapshot 1`] = `
+<div>
+  <div
+    class="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-center mx-auto max-w-md"
+  >
+    <div
+      class="flex flex-col max-w-xs"
+    >
+      <label
+        class="text-sm font-medium text-gray-700 mb-1"
+      >
+        Tags
+      </label>
+      <div
+        class="flex flex-wrap gap-2 max-h-40 overflow-y-auto border rounded p-2"
+      >
+        <label
+          class="inline-flex items-center space-x-2 cursor-pointer"
+        >
+          <input
+            class="form-checkbox"
+            name="tags"
+            type="checkbox"
+            value="mobile"
+          />
+          <span
+            class="text-gray-700 text-sm"
+          >
+            mobile
+          </span>
+        </label>
+        <label
+          class="inline-flex items-center space-x-2 cursor-pointer"
+        >
+          <input
+            class="form-checkbox"
+            name="tags"
+            type="checkbox"
+            value="lifestyle"
+          />
+          <span
+            class="text-gray-700 text-sm"
+          >
+            lifestyle
+          </span>
+        </label>
+        <label
+          class="inline-flex items-center space-x-2 cursor-pointer"
+        >
+          <input
+            class="form-checkbox"
+            name="tags"
+            type="checkbox"
+            value="motor"
+          />
+          <span
+            class="text-gray-700 text-sm"
+          >
+            motor
+          </span>
+        </label>
+        <label
+          class="inline-flex items-center space-x-2 cursor-pointer"
+        >
+          <input
+            class="form-checkbox"
+            name="tags"
+            type="checkbox"
+            value="work"
+          />
+          <span
+            class="text-gray-700 text-sm"
+          >
+            work
+          </span>
+        </label>
+        <label
+          class="inline-flex items-center space-x-2 cursor-pointer"
+        >
+          <input
+            class="form-checkbox"
+            name="tags"
+            type="checkbox"
+            value="laptop"
+          />
+          <span
+            class="text-gray-700 text-sm"
+          >
+            laptop
+          </span>
+        </label>
+      </div>
+    </div>
+    <div
+      class="flex flex-col"
+    >
+      <label
+        class="text-sm font-medium text-gray-700"
+        for="filter-sale"
+      >
+        Type
+      </label>
+      <select
+        autocapitalize="off"
+        class="border rounded p-2"
+        id="filter-sale"
+        name="sale"
+      >
+        <option
+          value="all"
+        >
+          All
+        </option>
+        <option
+          value="true"
+        >
+          Sale
+        </option>
+        <option
+          value="false"
+        >
+          Buy
+        </option>
+      </select>
+    </div>
+    <button
+      class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+    >
+      Clear
+    </button>
+  </div>
+</div>
+`;
