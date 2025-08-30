@@ -17,24 +17,9 @@ An online store application built with React, TypeScript, and Redux Toolkit. Thi
 
 ---
 
-## 🏗️ Architecture
-
 ### Redux Store
 
-The application uses Redux Toolkit with the following structure:
-
-src/store/
-├── index.ts # Main store configuration
-├── types.ts # Shared store types
-├── hooks.ts # Typed Redux hooks
-├── slices/ # Redux Toolkit slices
-│ ├── authSlice.ts # Authentication and session
-│ ├── advertsSlice.ts # Advertisement management
-│ └── tagsSlice.ts # Tag management
-└── selectors/ # Store selectors
-├── authSelectors.ts
-├── advertsSelectors.ts
-└── tagsSelectors.ts
+The application uses Redux Toolkit
 
 ### Main Slices
 
@@ -128,13 +113,13 @@ npm run test:coverage
 
 ## Test Configuration
 
-    - Vitest: Testing framework
+    * Vitest: Testing framework
 
-    - Testing Library: Component testing utilities
+    * Testing Library: Component testing utilities
 
-    - JSDOM: DOM environment for tests
+    * JSDOM: DOM environment for tests
 
-    - Mocks: localStorage, sessionStorage, and services
+    * Mocks: localStorage, sessionStorage, and services
 
 ## Redux DevTools
 
@@ -147,11 +132,11 @@ NODE_ENV=production  # DevTools disabled
 
 ## Main Components
 
-    - SessionBootstrap: Restores session from localStorage on app start
+    * SessionBootstrap: Restores session from localStorage on app start
 
-    - AdvertFilters: Connected to Redux; allows filtering advertisements by multiple criteria
+    * AdvertFilters: Connected to Redux; allows filtering advertisements by multiple criteria
 
-    - Navbar: Main navigation with authentication state and login/logout actions
+    * Navbar: Main navigation with authentication state and login/logout actions
 
 ## Data Flow\
 
@@ -180,32 +165,32 @@ npm run test:coverage # Tests with coverage
 
 ## Dependencies
 
-    - React 19: UI framework
+    * React 19: UI framework
 
-    - Redux Toolkit: State management
+    * Redux Toolkit: State management
 
-    - React Router DOM: Routing
+    * React Router DOM: Routing
 
-    - TypeScript: Static typing
+    * TypeScript: Static typing
 
-    - Tailwind CSS: CSS framework
+    * Tailwind CSS: CSS framework
 
-    - Lucide React: Icon library
+    * Lucide React: Icon library
 
-    - Vitest: Testing framework
+    * Vitest: Testing framework
 
-    - Testing Library: Testing utilities
+    * Testing Library: Testing utilities
 
 ## Learnings & Concepts Applied
 
-    - State Management: useState, createContext/ContextProvider, Redux Toolkit
+    * State Management: useState, createContext/ContextProvider, Redux Toolkit
 
-    - Lifecycle Management: useEffect for side effects
+    * Lifecycle Management: useEffect for side effects
 
-    - Routing: React Router DOM for navigation and dynamic routes
+    * Routing: React Router DOM for navigation and dynamic routes
 
-    - Styling: Tailwind CSS utility-first approach
+    * Styling: Tailwind CSS utility-first approach
 
-    - API Integration: Handling CRUD operations and file uploads
+    * API Integration: Handling CRUD operations and file uploads
 
-    - Local & Session Storage: Managing user sessions and authentication tokens
+    * Local & Session Storage: Managing user sessions and authentication tokens
