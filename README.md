@@ -1,139 +1,211 @@
-# React-Walla-Store
+# React Walla Store
+
+An online store application built with React, TypeScript, and Redux Toolkit. This project is a practice e-commerce style application, allowing users to browse, create, and manage advertisements for items they want to sell or buy. It demonstrates fundamental React concepts and modern state management with Redux Toolkit.
 
 ---
 
-## 🚀 Project Overview
+## 🚀 Features
 
-WallaStore is a practice e-commerce style application built as part of the Keepcoding Web Development Bootcamp. This application allows users to browse, create, and manage advertisements for items they want to sell or buy. It's a demonstration of fundamental React concepts.
-
----
-
-## ✨ Features
-
-- **Advertisements:** View a list of adverts, categorized by whether they are for sale or wanted items.
-
-- **Advert Creation:** Easily create new adverts, with an optional image upload. Images are handled using `multipart/form-data`.
-
-- **Advert Details:** Click on any advert to see its full details and, if you're the owner, the option to delete it.
-
-- **Filtering:** Filter adverts by type ("sale" or "buy") and by various tags like "lifestyle," "mobile," or "motor."
-
-- **User Authentication:** Secure login with "remember me" functionality. If checked, your authentication token is stored in **`localStorage`**; otherwise, it's stored in **`sessionStorage`**.
+- **State Management:** Redux Toolkit for centralized state management
+- **Authentication:** Login/logout system with localStorage/sessionStorage persistence and "remember me" functionality
+- **Ad Management:** Complete CRUD operations for advertisements with filters and pagination
+- **Advanced Filters:** Filtering by name, sale type, price, and tags
+- **Responsive Design:** Adaptive interface with Tailwind CSS
+- **TypeScript:** Complete static typing
+- **Testing:** Comprehensive unit test suite with Vitest
+- **Image Uploads:** Optional image uploads using multipart/form-data
 
 ---
 
-## 🛠️ Technologies Used
+## 🏗️ Architecture
 
-- **React:** The core JavaScript library for building the user interface.
+### Redux Store
 
-- **Vite:** A fast build tool for modern web projects.
+The application uses Redux Toolkit with the following structure:
 
-- **Tailwind CSS:** A utility-first CSS framework for rapid and responsive styling.
+src/store/
+├── index.ts # Main store configuration
+├── types.ts # Shared store types
+├── hooks.ts # Typed Redux hooks
+├── slices/ # Redux Toolkit slices
+│ ├── authSlice.ts # Authentication and session
+│ ├── advertsSlice.ts # Advertisement management
+│ └── tagsSlice.ts # Tag management
+└── selectors/ # Store selectors
+├── authSelectors.ts
+├── advertsSelectors.ts
+└── tagsSelectors.ts
 
-- **Lucide React:** A beautiful and customizable icon library for React.
+### Main Slices
 
-- **React Router DOM:** For declarative routing within the application.
+#### Auth Slice
 
-- **Fundamental React Concepts:** Use of `useState`, `useEffect`, `createContext`, and `ContextProvider` for state management and data flow.
+- **Actions:** `bootstrapSession`, `login`, `logout`
+- **State:** `token`, `user`, authentication status
+
+#### Adverts Slice
+
+- **Actions:** `fetchAdverts`, `fetchAdvertDetail`, `createAdvert`, `deleteAdvert`
+- **State:** `advertisements`, `filters`, `pagination`
+
+#### Tags Slice
+
+- **Actions:** `fetchTags`
+- **State:** `tag list`
 
 ---
 
-## ⚙️ Getting Started
+## 🛠️ Installation
 
-To get a copy of the project up and running on your local machine, follow these simple steps.
-
-### Prerequisites
-
-Make sure you have Node.js installed.
-
-### Installation
-
-1.  **Clone the repository:**
+## Backend Setup
 
 ```bash
-git clone https://github.com/Mitronios/keepcoding-react-fundamentals-walla-store
-
+# Clone repository
+git clone <repository-url>
 cd react-walla-store
 
-```
-
-2.  **Install dependencies:**
-
-```bash
+# Install dependencies
 npm install
-# or
-yarn install
 
-```
-
-3.  **Run the development server:**
-
-```bash
+# Run in development mode
 npm run dev
-# or
-yarn dev
 
-```
+# Build for production
+npm run build
 
-    This will typically open the application in your browser at `http://localhost:5173`.
-
-4.  **Clone the Backend repository**
-
-```bash
+# Clone backend repository
 git clone https://github.com/davidjj76/nodepop-api
-
 cd nodepop-api
 
-```
-
-5.  **Install dependencies:**
-
-```bash
+# Install dependencies
 npm install
-# or
-yarn install
 
-```
-
-6.  **Run the development server:**
-
-```bash
+# Run development server
 npm run dev
-# or
-yarn dev
 
 ```
 
-7. **Check the swagger docs**
-
-- Navigate to: /swagger and check how the API works.
-
-- If preferred use docker hub:
+# Optional: Docker
 
 ```bash
-    $ docker run --name nodepop-api -dp 3001:3001 -v nodepop-api-data:/home/node/app/data -v nodepop-api-uploads:/home/node/app/uploads davidjj76/nodepop-api
+docker run --name nodepop-api -dp 3001:3001 \
+  -v nodepop-api-data:/home/node/app/data \
+  -v nodepop-api-uploads:/home/node/app/uploads \
+  davidjj76/nodepop-api
 ```
 
----
+## 🧪 Testing
 
-## 📚 Learnings & Concepts Applied
+```bash
+# Watch mode
+npm test
 
-This project provided hands-on experience with:
+# Run once
+npm run test:run
 
-- **State Management:** Effectively using `useState` for local component state and `createContext`/`ContextProvider` for global application state.
+# Run with UI
+npm run test:ui
 
-- **Lifecycle Methods with `useEffect`:** Managing side effects in functional components.
+# Run with coverage
+npm run test:coverage
+```
 
-- **Routing with React Router DOM:** Implementing navigation and dynamic routes.
+## Test Coverage
 
-- **Styling with Tailwind CSS:** Rapidly styling components with utility classes.
+    1. The application includes tests for:
 
-- **API Integration:** Handling data fetching and submission, including `multipart/form-data` for file uploads.
+    2. Synchronous Actions: authSlice.test.ts
 
-- **Local and Session Storage:** Managing user sessions and authentication tokens.
+    3. Asynchronous Actions: authSlice.async.test.ts
 
----
+    4. Reducers: advertsSlice.test.ts
 
-## 🎓 Acknowledgment
+    5. Selectors: advertsSelectors.test.ts
 
-This project was developed as a practice exercise during the **Keepcoding Web Development Bootcamp**. It represents a culmination of the fundamental React principles taught throughout the course.
+    6. Snapshot Testing: AdvertFilters.test.tsx
+
+    7. Store Actions: AdvertFilters.actions.test.tsx
+
+## Test Configuration
+
+    - Vitest: Testing framework
+
+    - Testing Library: Component testing utilities
+
+    - JSDOM: DOM environment for tests
+
+    - Mocks: localStorage, sessionStorage, and services
+
+## Redux DevTools
+
+Redux DevTools is automatically enabled in development mode for debugging.
+
+```bash
+NODE_ENV=development # DevTools enabled
+NODE_ENV=production  # DevTools disabled
+```
+
+## Main Components
+
+    - SessionBootstrap: Restores session from localStorage on app start
+
+    - AdvertFilters: Connected to Redux; allows filtering advertisements by multiple criteria
+
+    - Navbar: Main navigation with authentication state and login/logout actions
+
+## Data Flow\
+
+    1. Initialization: SessionBootstrap restores session
+
+    2. Authentication: Login/logout updates store and storage
+
+    3. Data: Components connect to store via hooks
+
+    4. Filters: Filter changes trigger Redux actions
+
+    5. UI: Components automatically re-render
+
+## Available Scripts
+
+```bash
+npm run dev           # Development server
+npm run build         # Production build
+npm run preview       # Production preview
+npm run lint          # Code linting
+npm test              # Run tests
+npm run test:run      # Tests once
+npm run test:ui       # Tests with UI
+npm run test:coverage # Tests with coverage
+```
+
+## Dependencies
+
+    - React 19: UI framework
+
+    - Redux Toolkit: State management
+
+    - React Router DOM: Routing
+
+    - TypeScript: Static typing
+
+    - Tailwind CSS: CSS framework
+
+    - Lucide React: Icon library
+
+    - Vitest: Testing framework
+
+    - Testing Library: Testing utilities
+
+## Learnings & Concepts Applied
+
+    - State Management: useState, createContext/ContextProvider, Redux Toolkit
+
+    - Lifecycle Management: useEffect for side effects
+
+    - Routing: React Router DOM for navigation and dynamic routes
+
+    - Styling: Tailwind CSS utility-first approach
+
+    - API Integration: Handling CRUD operations and file uploads
+
+    - Local & Session Storage: Managing user sessions and authentication tokens
