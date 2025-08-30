@@ -97,29 +97,29 @@ npm run test:coverage
 
 ## Test Coverage
 
-    1. The application includes tests for:
+The application includes tests for:
 
-    2. Synchronous Actions: authSlice.test.ts
+1. **Synchronous Actions:** authSlice.test.ts
 
-    3. Asynchronous Actions: authSlice.async.test.ts
+2. **Asynchronous Actions:** authSlice.async.test.ts
 
-    4. Reducers: advertsSlice.test.ts
+3. **Reducers:** advertsSlice.test.ts
 
-    5. Selectors: advertsSelectors.test.ts
+4. **Selectors:** advertsSelectors.test.ts
 
-    6. Snapshot Testing: AdvertFilters.test.tsx
+5. **Snapshot Testing:** AdvertFilters.test.tsx
 
-    7. Store Actions: AdvertFilters.actions.test.tsx
+6. Store Actions: AdvertFilters.actions.test.tsx
 
 ## Test Configuration
 
-    -Vitest: Testing framework
+- **Vitest:** Testing framework
 
-    -Testing Library: Component testing utilities
+- **Testing Library:** Component testing utilities
 
-    -JSDOM: DOM environment for tests
+- **JSDOM:** DOM environment for tests
 
-    -Mocks: localStorage, sessionStorage, and services
+- **Mocks:** localStorage, sessionStorage, and services
 
 ## Redux DevTools
 
@@ -132,23 +132,23 @@ NODE_ENV=production  # DevTools disabled
 
 ## Main Components
 
-    -SessionBootstrap: Restores session from localStorage on app start
+- **SessionBootstrap:** Restores session from localStorage on app start
 
-    -AdvertFilters: Connected to Redux; allows filtering advertisements by multiple criteria
+- **AdvertFilters:** Connected to Redux; allows filtering advertisements by multiple criteria
 
-    -Navbar: Main navigation with authentication state and login/logout actions
+- **Navbar:** Main navigation with authentication state and login/logout actions
 
 ## Data Flow
 
-    1. Initialization: SessionBootstrap restores session
+1. **Initialization:** SessionBootstrap restores session
 
-    2. Authentication: Login/logout updates store and storage
+2. **Authentication:** Login/logout updates store and storage
 
-    3. Data: Components connect to store via hooks
+3. **Data:** Components connect to store via hooks
 
-    4. Filters: Filter changes trigger Redux actions
+4. **Filters:** Filter changes trigger Redux actions
 
-    5. UI: Components automatically re-render
+5. **UI:** Components automatically re-render
 
 ## Available Scripts
 
@@ -165,32 +165,32 @@ npm run test:coverage # Tests with coverage
 
 ## Dependencies
 
-    -React 19: UI framework
+- **React 19:** UI framework
 
-    -Redux Toolkit: State management
+- **Redux Toolkit:** State management
 
-    -React Router DOM: Routing
+- **React Router DOM:** Routing
 
-    -TypeScript: Static typing
+- **TypeScript:** Static typing
 
-    -Tailwind CSS: CSS framework
+- **Tailwind CSS:** CSS framework
 
-    -Lucide React: Icon library
+- **Lucide React:** Icon library
 
-    -Vitest: Testing framework
+- **Vitest:** Testing framework
 
-    -Testing Library: Testing utilities
+- **Testing Library:** Testing utilities
 
 ## Learnings & Concepts Applied
 
-    -State Management: useState, createContext/ContextProvider, Redux Toolkit
+- **State Management:** useState, createContext/ContextProvider, Redux Toolkit
 
-    -Lifecycle Management: useEffect for side effects
+- **Lifecycle Management:** useEffect for side effects
 
-    -Routing: React Router DOM for navigation and dynamic routes
+- **Routing:** React Router DOM for navigation and dynamic routes
 
-    -Styling: Tailwind CSS utility-first approach
+- **Styling:** Tailwind CSS utility-first approach
 
-    -API Integration: Handling CRUD operations and file uploads
+- **API Integration:** Handling CRUD operations and file uploads
 
-    -Local & Session Storage: Managing user sessions and authentication tokens
+- **Local & Session Storage:** Managing user sessions and authentication tokens
