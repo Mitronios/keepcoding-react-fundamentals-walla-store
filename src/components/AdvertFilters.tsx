@@ -1,110 +1,112 @@
 import { useEffect, useState } from "react";
-import type { filtersType } from "../interfaces/filtersType";
-import { getAvailableTags } from "../services/advertServices";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setFilters, clearFilters } from "../store/slices/advertsSlice";
+import { selectTagsItems } from "../store/selectors";
+import type { FiltersState } from "../store/types";
 
-interface AdvertFiltersProps {
-	onChange: (filters: filtersType) => void;
-}
+const AdvertFilters = () => {
+  const dispatch = useAppDispatch();
+  const availableTags = useAppSelector(selectTagsItems);
 
-const AdvertFilters = ({ onChange }: AdvertFiltersProps) => {
-	const [sale, setSale] = useState("all");
-	const [tags, setTags] = useState<string[]>([]);
-	const [availableTags, setAvailableTags] = useState<string[]>([]);
+  const [sale, setSale] = useState("all");
+  const [tags, setTags] = useState<string[]>([]);
 
-	useEffect(() => {
-		const fetchTags = async () => {
-			try {
-				const tagsFromServer = await getAvailableTags();
-				setAvailableTags(tagsFromServer);
-			} catch (error) {
-				console.error("Error loading tags", error);
-			}
-		};
-		fetchTags();
-	}, []);
+  useEffect(() => {
+    const filters: FiltersState = {};
 
-	useEffect(() => {
-		const filters: filtersType = {};
+    if (sale !== "all") {
+      filters.sale = sale === "true";
+    }
 
-		if (sale !== "all") {
-			filters.sale = sale === "true";
-		}
+    if (tags.length > 0) {
+      filters.tags = tags;
+    }
 
-		if (tags.length > 0) {
-			filters.tags = tags.join(",");
-		}
+    dispatch(setFilters(filters));
+  }, [sale, tags, dispatch]);
 
-		onChange(filters);
-	}, [sale, tags]);
+  const handleOnChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const { name, value, checked } = target;
 
-	const handleOnChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-	) => {
-		const target = event.target as HTMLInputElement;
-		const { name, value, checked } = target;
+    switch (name) {
+      case "sale":
+        setSale(value);
+        break;
+      case "tags":
+        if (checked) {
+          setTags((prev) => [...prev, value]);
+        } else {
+          setTags((prev) => prev.filter((tag) => tag !== value));
+        }
+        break;
+    }
+  };
 
-		switch (name) {
-			case "sale":
-				setSale(value);
-				break;
-			case "tags":
-				if (checked) {
-					setTags((prev) => [...prev, value]);
-				} else {
-					setTags((prev) => prev.filter((tag) => tag !== value));
-				}
-				break;
-		}
-	};
+  const handleClearFilters = () => {
+    setSale("all");
+    setTags([]);
+    dispatch(clearFilters());
+  };
 
-	return (
-		<div className="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-col gap-4 md:flex-row md:items-center md justify-center mx-auto max-w-md">
-			{/* Filter by tags */}
-			<div className="flex flex-col max-w-xs">
-				<label className="text-sm font-medium text-gray-700 mb-1">Tags</label>
-				<div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto border rounded p-2">
-					{availableTags.map((tag) => (
-						<label
-							key={tag}
-							className="inline-flex items-center space-x-2 cursor-pointer"
-						>
-							<input
-								type="checkbox"
-								name="tags"
-								value={tag}
-								checked={tags.includes(tag)}
-								onChange={handleOnChange}
-								className="form-checkbox"
-							/>
-							<span className="text-gray-700 text-sm">{tag}</span>
-						</label>
-					))}
-				</div>
-			</div>
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-md mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-center mx-auto max-w-md">
+      {/* Filter by tags */}
+      <div className="flex flex-col max-w-xs">
+        <label className="text-sm font-medium text-gray-700 mb-1">Tags</label>
+        <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto border rounded p-2">
+          {availableTags.map((tag) => (
+            <label
+              key={tag}
+              className="inline-flex items-center space-x-2 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                name="tags"
+                value={tag}
+                checked={tags.includes(tag)}
+                onChange={handleOnChange}
+                className="form-checkbox"
+              />
+              <span className="text-gray-700 text-sm">{tag}</span>
+            </label>
+          ))}
+        </div>
+      </div>
 
-			{/* Filter by type */}
-			<div className="flex flex-col">
-				<label
-					htmlFor="filter-sale"
-					className="text-sm font-medium text-gray-700"
-				>
-					Type
-				</label>
-				<select
-					id="filter-sale"
-					name="sale"
-					value={sale}
-					onChange={handleOnChange}
-					className="border rounded p-2"
-					autoCapitalize="off"
-				>
-					<option value="all">All</option>
-					<option value="true">Sale</option>
-					<option value="false">Buy</option>
-				</select>
-			</div>
-		</div>
-	);
+      {/* Filter by type */}
+      <div className="flex flex-col">
+        <label
+          htmlFor="filter-sale"
+          className="text-sm font-medium text-gray-700"
+        >
+          Type
+        </label>
+        <select
+          id="filter-sale"
+          name="sale"
+          value={sale}
+          onChange={handleOnChange}
+          className="border rounded p-2"
+          autoCapitalize="off"
+        >
+          <option value="all">All</option>
+          <option value="true">Sale</option>
+          <option value="false">Buy</option>
+        </select>
+      </div>
+
+      {/* Clear filters button */}
+      <button
+        onClick={handleClearFilters}
+        className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+      >
+        Clear
+      </button>
+    </div>
+  );
 };
 
 export default AdvertFilters;

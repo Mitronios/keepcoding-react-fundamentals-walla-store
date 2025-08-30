@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { SessionBootstrap } from "./components/SessionBootstrap";
 import Navbar from "./components/layout/navBar";
 import Adverts from "./pages/Adverts";
 import LoginForm from "./pages/LoginForm";
@@ -8,62 +9,56 @@ import NewAdvertPage from "./pages/NewAdvertPage";
 import NotFound from "./pages/NotFound";
 
 function App() {
-	return (
-		<>
-			<Navbar />
-			<main
-				className=" max-w-[1024px] w-[90%] my-0 mx-auto
-    bg-gray-100"
-			>
-				<Routes>
-					<Route
-						path="/login"
-						element={<LoginForm />}
-					/>
-					<Route
-						path="/"
-						element={
-							<RequireAuth>
-								<Adverts />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/adverts"
-						element={
-							<RequireAuth>
-								<Adverts />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/adverts/:id"
-						element={
-							<RequireAuth>
-								<AdvertDetail />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/adverts/new-advert"
-						element={
-							<RequireAuth>
-								<NewAdvertPage />
-							</RequireAuth>
-						}
-					/>
-					<Route
-						path="/not-found"
-						element={<NotFound />}
-					/>
-					<Route
-						path="*"
-						element={<NotFound />}
-					/>
-				</Routes>
-			</main>
-		</>
-	);
+  return (
+    <SessionBootstrap>
+      <>
+        <Navbar />
+        <main className="max-w-[1024px] w-[90%] my-0 mx-auto bg-gray-100">
+          <Routes>
+            <Route path="/login" element={<LoginForm />} />
+
+            {/* Private routes */}
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Adverts />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/adverts"
+              element={
+                <RequireAuth>
+                  <Adverts />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/adverts/:id"
+              element={
+                <RequireAuth>
+                  <AdvertDetail />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/adverts/new-advert"
+              element={
+                <RequireAuth>
+                  <NewAdvertPage />
+                </RequireAuth>
+              }
+            />
+
+            {/* Not Found */}
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </>
+    </SessionBootstrap>
+  );
 }
 
 export default App;
